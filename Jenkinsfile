@@ -1,20 +1,16 @@
-pipeline {
+pipeline {                              // start our pipeline -FIRE!
     agent any
     stages {
-        stage('Hello World') {
-            steps {
-                echo 'Hello World! Shrinking shadows start the day'
-            }
-        }
-        stage('Hello Moon') {
-            steps {
-                echo 'Hello Moon! Casting bright on snowy nights'
-            }
-        }
-        stage('Hello Mars') {
-            steps {
-                echo 'Hello Mars! Twinkling like a tiny star'
-            }
-        }            
-    }
-}
+        stage('Verification Step') {          // stage 1 - "verification"
+            steps {                           // first step produces NULL or NOT NULL
+                sh '''my_var=$GIT_BRANCH        
+                if [ -z "$my_var" ]
+                then
+                      echo "\\$my_var is NULL"
+                else
+                      echo "\\$my_var is NOT NULL"
+                fi'''
+            }                           // end of step
+        }                               // end of stage 1 - 'Verification Step'
+    }                                   // end of stages
+}                                       // end of pipeline
